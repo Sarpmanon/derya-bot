@@ -63,6 +63,11 @@ client.on('guildCreate', async (guild) => {
 client.on('messageCreate', async message => {
     if (message.author.bot || !message.guild) return;
 
+    const guildCommands = await client.application.commands.fetch({ guildId: message.guild?.id });
+    if (guildCommands.size != 15) {
+      loadCommands(message.guild, client)
+    }
+
     /* BUGGY
     if (zencimessage == ""){
       zencimessage = message;
@@ -183,7 +188,7 @@ client.on('debug', (info) => {
           .send(`yine rate-limit yedin aptal orsbbucocu <@1198735588115873863>`);
       }, 5000);
   }
-}); //GPT also helped with this, since I know literally NOTHING about the rate-limit-discord management thingy
+});
 
 
 client.login(process.env.TOKEN);
