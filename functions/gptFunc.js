@@ -57,10 +57,10 @@ async function gptFunc(message, client) {
           console.log(`yine mi openai hatası yapma etme gözünü seveyim: ${error}`);
         });
       if (result.choices[0].message.content.length < 2000) {
-        message.reply(result.choices[0].message.content);
+        await message.reply(result.choices[0].message.content);
       }
       else {
-        message.reply('mesaj çok uzun be fiksicim (masayı yumruklar)')
+        await message.reply('mesaj çok uzun be fiksicim (masayı yumruklar)')
       }
     } catch (error) {
       console.log(`yine mi hata verdi yapma etme gözünü seveyim: ${error}`);
