@@ -8,7 +8,7 @@ module.exports = {
         const coorX = interaction.options.getString('xkoor')
         const coorY = interaction.options.getString('ykoor')
         interaction.deferReply();
-        //interaction.reply('görüntün indiriliyor fiksicim...')
+        //interaction.reply('görüntün indiriliyor fiksicim...').
         const sequelize = new Sequelize('database', 'user', 'password', {
           host: 'localhost',
           dialect: 'sqlite',
