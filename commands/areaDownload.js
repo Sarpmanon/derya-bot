@@ -46,7 +46,8 @@ module.exports = {
           while (zencigot == true) {
             if (fs.existsSync(`${interaction.user.id}.png`)) {
               interaction.editReply({
-                content: "Resmin hazır fiksicim :3", 
+                //content: "Resmin hazır fiksicim :3",
+                content: "your image was downloaded successfully", 
                 files: [{ attachment: `${interaction.user.id}.png` }]
             });
               zencigot = false;
