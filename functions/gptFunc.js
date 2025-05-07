@@ -27,7 +27,7 @@ async function gptFunc(message, client) {
     }
   }
 
-  // Geçmiş mesajları topla (maksimum 5)
+
   let prevMessages = await message.channel.messages.fetch({ limit: 5 });
   prevMessages.reverse();
 
@@ -48,7 +48,6 @@ async function gptFunc(message, client) {
     }
   });
 
-  // Ana mesajı da ekle
   conversationLog.push({
     role: 'user',
     content: message.content,
