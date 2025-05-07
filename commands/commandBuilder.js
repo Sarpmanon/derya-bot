@@ -11,9 +11,9 @@ module.exports = {
 	name: 'commandBuilder',
 	execute(guild, client) {
 
-    const statsComm = new SlashCommandBuilder()
-    .setName('stats')
-    .setDescription('Current stats of bot')
+       const statsComm = new SlashCommandBuilder()
+         .setName('stats')
+         .setDescription('Current stats of bot')
 
 
 		const top15Comm = new SlashCommandBuilder()
@@ -48,7 +48,17 @@ module.exports = {
 			.setName('ykoor')
 			  .setDescription('y coordinates')
 			 .setRequired(true);
-			});
+			})
+		.addStringOption(option =>
+			option.setName('canvas')
+				.setDescription('canvas bruh')
+				.setRequired(true)
+				.addChoices(
+					{ name: 'World 🌍', value: 'world' },
+					{ name: 'Mini World 🗺️', value: 'mini' },
+					{ name: 'Graffiti 🎨', value: 'graffiti' },
+					{ name: 'Top 15 🎖️', value: 'top15' },
+				));
 
 
 		 const factioninfoComm = new SlashCommandBuilder()
