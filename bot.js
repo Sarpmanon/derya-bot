@@ -50,6 +50,14 @@ client.on('messageReactionRemove', async (reaction, user) => {
 
 client.once('ready', () => { // Bot başladığında
     console.log(`[STARTUP] - ${client.user.tag} is online.`);
+
+    client.user.setPresence({
+      activities: [{
+        name: 'PixelYa',
+        type: 'PLAYING'
+      }],
+      status: 'online'
+    });
 });
 
 client.on('guildDelete', guild => {
@@ -189,6 +197,5 @@ client.on('debug', (info) => {
       }, 5000);
   }
 });
-
 
 client.login(process.env.TOKEN);
