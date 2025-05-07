@@ -43,7 +43,7 @@ async function downloadPixelya(message) {
     const startx_starty = x_start + "_" + y_start
     const endx_endy = x_end + "_" + y_end
           
-    msg = await message.reply('your image is being downloaded pookie... hang tight!')
+    msg = await message.reply('Your image is being downloaded, give me a second...')
     //await message.channel.sendTyping();
 
     exec(`python commands\\areaDownPYA.py ${canvasID} ${startx_starty} ${endx_endy} ${message.author.id}.png`, (error, stdout, stderr) => {
@@ -74,7 +74,7 @@ async function downloadPixelya(message) {
       while (zencigot == true) {
         if (fs.existsSync(`${message.author.id}.png`)) {
           await msg.edit({
-            content: "Your image is ready pookie, enjoy it :3", 
+            content: "Your image is ready.", 
             files: [{ attachment: `${message.author.id}.png` }] });
           zencigot = false;
           setTimeout(function(){
