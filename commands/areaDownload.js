@@ -1,22 +1,35 @@
 const { exec } = require("child_process");
 const fs = require('fs');
-const Sequelize = require('sequelize');
 
 module.exports = {
     name: 'areadownload',
     execute (interaction, Discord, client) {
         const coorX = interaction.options.getString('xkoor')
         const coorY = interaction.options.getString('ykoor')
+        const canvas = interaction.options.getString("canvas")
+
+        let canvasRiyalID = "0";
+
+        switch(canvas) {
+          case 'world':
+            canvasRiyalID = "5";
+            break;
+          case 'mini':
+            canvasRiyalID = "0";
+            break;
+          case 'graffiti':
+            canvasRiyalID = "1";
+            break;
+          case 'top15':
+            canvasRiyalID = "6";
+            break;
+        }
+
+
         interaction.deferReply();
-        //interaction.reply('görüntün indiriliyor fiksicim...').
-        const sequelize = new Sequelize('database', 'user', 'password', {
-          host: 'localhost',
-          dialect: 'sqlite',
-          logging: false,
-          // SQLite only
-          storage: 'database.sqlite',
-        });
-        exec(`python commands\\areaDownPYA.py 5 ${coorX} ${coorY} ${interaction.user.id}.png`, (error, stdout, stderr) => {
+        //interaction.reply('görüntün indiriliyor fiksicim...')
+
+        exec(`python commands\\areaDownPYA.py ${canvasRiyalID} ${coorX} ${coorY} ${interaction.user.id}.png`, (error, stdout, stderr) => {
             if (error) {
                 console.log(`areadownload hatası: ${error.message}`);
                 return;
