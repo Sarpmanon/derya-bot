@@ -49,6 +49,8 @@ module.exports = {
            return; 
         }
 
+        await interaction.deferReply();
+
         const json = await fetch("https://pixelya.fun/api/userinfo", {
             method: "POST",
             body: JSON.stringify({
@@ -94,7 +96,8 @@ module.exports = {
           badges = await checkTag(null, badges, data.userinfo.tags);
           
           const userEmbed = new Discord.MessageEmbed()
-          .setTitle("User Profile")
+          .setTitle(`User Profile`)
+          .setURL(`https://pixelya.fun/userinfo?id=${item.gameID}`)
           .addField(`\`\`\`${data.userinfo.faction == null ? name + "#" + userID : data.userinfo.faction[0] + " " + name + "#" + userID}\`\`\` ${patent + badges}`, `\`\`\`${description == null ? "N/A" : description}\`\`\``, false)
 
           .addField("```Created At```", `\`\`\`${createdat}\`\`\``, false)
@@ -112,9 +115,9 @@ module.exports = {
          .setImage(data.userinfo.banner == "/unknownBanner.png" ? "https://pixelya.fun/unknownBanner.png" : data.userinfo.banner)
          .setTimestamp()
 
-         await interaction.reply({ embeds: [userEmbed]})
+         await interaction.editReply({ embeds: [userEmbed]})
         } catch (err) {
-        
+          console.log("hata var amk", err)
         }
         }
     }
