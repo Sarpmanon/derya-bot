@@ -58,7 +58,7 @@ module.exports = {
             data.push(newData);
             fs.writeFileSync('../derya-bot/templateshit/data.json', JSON.stringify(data, null, 2));
             console.log(newId)
-            interaction.reply(`Your template was added succesfully pookie. ID: __**${newId}**__ (remember that)`)
+            interaction.reply(`Your template was added succesfully. ID: __**${newId}**__ (remember that)`)
         }
         catch (err) {
             interaction.reply('Hata: ' + err)
