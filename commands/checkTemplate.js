@@ -20,7 +20,7 @@ module.exports = {
             let rawData = fs.readFileSync('../derya-bot//templateshit/data.json');
             let data = JSON.parse(rawData)
 
-            const result = await getLinkAndCoordinatesById(checkTempID, data);
+            const result = await getLinkAndCoordinatesById(checkTempID, data, interaction);
 
             if (!result) {
                 return;  //ol artık amk
