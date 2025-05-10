@@ -37,6 +37,9 @@ async function starboardMain(reaction, client) {
     return;
   }
 
+  const attachments = message.attachments;
+  const imageAttachment = attachments.find(attachment => attachment.contentType?.startsWith('image'));
+
   const embed = new MessageEmbed()
   .setColor("RANDOM")
   .setAuthor({ name: `${message.author.username}`, iconURL: `${message.author.avatarURL()}` })
@@ -44,6 +47,9 @@ async function starboardMain(reaction, client) {
   .addField("Mesaj", `[Mesaja git!](${message.url})`)
   .setFooter({ text: message.id })
   .setTimestamp()
+  if (imageAttachment) {
+    embed.setImage(imageAttachment.url);
+  }
 
   if (existing) {
     await existing.edit({ content: `<:AGAC:1067238356376895540> **${starCount}**`, embeds: [embed] });
