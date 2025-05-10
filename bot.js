@@ -61,7 +61,7 @@ client.once('ready', () => { // Bot başladığında
 });
 
 client.on('guildDelete', guild => {
-    console.log(`[${moment().format("YYYY-MM-DD HH:mm:ss")}] - ${client.user.tag} has been kicked out of server ${guild.id}.`)
+    console.log(`[${moment().format("YYYY-MM-DD HH:mm:ss")}] - ${client.user.tag} has been kicked out of server ${guild?.name}.`)
 });
 
 client.on('guildCreate', async (guild) => {
