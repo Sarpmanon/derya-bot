@@ -4,6 +4,7 @@ const fs = require('fs');
 const { Pool } = require('pg');
 const moment = require('moment');
 const { RateLimiterMemory } = require('rate-limiter-flexible');
+const chalk = require('chalk');
 
 const voidFunc = require("./functions/void");
 const downloadPixelya = require("./functions/pixelyadownloader");
@@ -61,11 +62,12 @@ client.once('ready', () => { // Bot başladığında
 });
 
 client.on('guildDelete', guild => {
-    console.log(`[${moment().format("YYYY-MM-DD HH:mm:ss")}] - ${client.user.tag} has been kicked out of server ${guild?.name}.`)
+    console.log(chalk.bold(`[${moment().format("YYYY-MM-DD HH:mm:ss")}] `) + `- ${client.user.tag} has been kicked out of server ${guild?.name}.`)
 });
 
 client.on('guildCreate', async (guild) => {
   loadCommands(guild, client);
+  console.log(chalk.bold(`[${moment().format("YYYY-MM-DD HH:mm:ss")}] ` + `- ${client.user.tag} has been added to the server ${guild?.name}`))
 });
 
 client.on('messageCreate', async message => {
@@ -124,11 +126,13 @@ client.on('interactionCreate', async(interaction) => {
     if (interaction.customId != undefined && interaction.customId == "next1" || interaction.customId == "next2" || interaction.customId == "back1" || interaction.customId == "back2") {
       listAllTemplates(interaction); //nested-ass ifs
     }
-  } else if (interaction.isButton()) {
-    if (interaction.customId != undefined && interaction.customId.startsWith("yesbutton") || interaction.customId.startsWith("nobutton")) {
+  }
+  if (interaction.isButton()) {
+    if (interaction.customId != undefined && interaction.customId.startsWith("yesbutton_") || interaction.customId.startsWith("nobutton_")) {
       deleteTemplateButton(interaction);
     }
-  } else if (interaction.isButton()) {
+  }
+  if (interaction.isButton()) {
     if (interaction.customId != undefined && interaction.customId.startsWith("json") || interaction.customId.startsWith("templatebutton")) {
       checkTemplateButton(interaction);
     }
