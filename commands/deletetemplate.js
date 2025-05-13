@@ -47,7 +47,8 @@ module.exports = {
                 await interaction.followUp({ content: "Your template wasn't deleted." })
 
                 const newRow = new MessageActionRow().addComponents(yesbutton, nobutton);
-                interaction.editReply({ components: [newRow] })
+                await interaction.editReply({ components: [newRow] })
+                return;
             } else {
                 yesbutton.setDisabled(true)
                 nobutton.setDisabled(true)
@@ -55,7 +56,8 @@ module.exports = {
                 const newRow = new MessageActionRow().addComponents(yesbutton, nobutton);
 
                 await interaction.followUp("This template does not belong to you or can't be deleted.")
-                interaction.editReply({ components: [newRow] })
+                await interaction.editReply({ components: [newRow] })
+                return;
             }
         }
     }
