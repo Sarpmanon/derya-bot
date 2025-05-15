@@ -4,7 +4,7 @@ module.exports = {
     name: 'help',
     async execute(interaction, Discord, client) {
         const helpEmbed = new MessageEmbed()
-        .setDescription(`This bot currently has **15** commands. You can get information about every one of them from here.`)
+        .setDescription(`This bot currently has **15** commands. You can get information about every one of them from here. [Add Me!](https://discord.com/oauth2/authorize?client_id=1333469883316441128&permissions=844162919489&integration_type=0&scope=bot)`)
         .setThumbnail(client.user.avatarURL())
         .setColor('RANDOM')
         .addField(`:bar_chart: /stats`, `Shows the stats of the bot (RAM usage, ping etc.).`)
