@@ -2,8 +2,10 @@
 
 async function deleteButtons(interaction) {
     try {
-        if (interaction.replied || interaction.deferred) return;
+        //if (interaction.replied || interaction.deferred) return;
+        await interaction.deferUpdate();
 
+        console.log(interaction.customId)
         const [buttonCustomID, InterUserID] = interaction.customId.split("_")
 
         if (InterUserID != interaction.user.id) {
