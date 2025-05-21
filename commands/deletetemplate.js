@@ -30,11 +30,13 @@ module.exports = {
                 target.visibility = "DELETED";
                 target.guildID = "DELETED";
                 target.canvasid = "DELETED";
+                target.fromlast = "DELETED";
 
                 await fs.writeFileSync("./templateshit/data.json", JSON.stringify(data, null, 2), 'utf8');
 
                 yesbutton.setDisabled(true)
                 nobutton.setDisabled(true)
+                
 
                 await interaction.followUp({ content: "Your template has been deleted succesfully." })
 

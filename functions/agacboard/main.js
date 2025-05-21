@@ -14,6 +14,7 @@ async function starboardMain(reaction, client) {
   const STAR_EMOJI = 'AGAC';
   const STAR_THRESHOLD = 7;
   const STARBOARD_CHANNEL_ID = '1063182152277180578';
+  const GUILD_ID = '407612821988179968'
 
   if (reaction.emoji.name !== STAR_EMOJI) return;
 
@@ -51,9 +52,9 @@ async function starboardMain(reaction, client) {
     embed.setImage(imageAttachment.url);
   }
 
-  if (existing) {
+  if (existing && channel.guildId == GUILD_ID) {
     await existing.edit({ content: `<:AGAC:1067238356376895540> **${starCount}**`, embeds: [embed] });
-  } else {
+  } else if (channel.guildId == GUILD_ID) {
     await starboardChannel.send({ content: `<:AGAC:1067238356376895540> **${starCount}**`, embeds: [embed] });
   }
 }

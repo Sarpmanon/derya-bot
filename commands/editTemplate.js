@@ -14,6 +14,7 @@ module.exports = {
         let data = JSON.parse(fs.readFileSync(`./templateshit/data.json`, 'utf8'));
 
         let target = data.find(obj => obj.id === selectedID);
+        target.fromlast = target.fromlast;
 
         if (target && target.owner == interaction.user.tag) {
             if (newName == null) {

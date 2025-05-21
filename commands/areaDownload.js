@@ -39,11 +39,15 @@ module.exports = {
                 return;
             }
 
-             if (stdout.includes('invalid') || stdout.includes('aligned wrong')) { 
-                interaction.reply({
-                  content: "Köşe koordinatları yanlış ayarlanmış", 
+             if (stdout.includes('invalid') || stdout.includes('aligned wrong')) {
+              try {
+                interaction.editReply({
+                  content: "Corner coordinates are aligned wrong", 
                   files: [{ attachment: `ogretici.gif` }]
-              })
+                })
+              } catch (error) {
+                console.log(`[AREADOWNLOAD ERROR] - ${error}`)
+              }
                 return stdout;
             } else { 
 

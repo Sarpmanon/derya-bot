@@ -52,7 +52,8 @@ module.exports = {
                 owner: username,
                 visibility: visibility,
                 guildID: guildID,
-                canvasid: canvasab
+                canvasid: canvasab,
+                fromlast: "0"
             };
 
             data.push(newData);

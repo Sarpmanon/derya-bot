@@ -103,8 +103,8 @@ module.exports = {
           .addField("```Created At```", `\`\`\`${createdat}\`\`\``, false)
           .addField("```Last Seen```", `\`\`\`${lastLogin}\`\`\``, false)
 
-          .addField("```Total Pixels```", `\`\`\`${totalpixels}\`\`\``, false)
-          .addField("```Daily Pixels```", `\`\`\`${dailypixels}\`\`\``, false)
+          .addField("```Total Pixels```", `\`\`\`${totalpixels.toLocaleString("tr-TR")}\`\`\``, false)
+          .addField("```Daily Pixels```", `\`\`\`${dailypixels.toLocaleString("tr-TR")}\`\`\``, false)
 
           .addField("```Global Ranking```", `\`\`\`#${globalranking}\`\`\``, false)
           .addField("```Daily Ranking```", `\`\`\`#${dailyranking}\`\`\``, false)

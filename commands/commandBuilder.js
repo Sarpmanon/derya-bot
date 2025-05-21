@@ -136,7 +136,7 @@ module.exports = {
 				 .addStringOption(option => {
 					return option
 					.setName('id')
-					  .setDescription('şablonunun id\'si')
+					  .setDescription('id of the template')
 					 .setRequired(true);
 					});
 
@@ -189,7 +189,7 @@ module.exports = {
 			.setDescription('view the profile of a member')
 			.addUserOption(option => {
 				return option
-				.setName('userid')
+				.setName('user')
 				  .setDescription('ID of the profile you wanna see')
 				})
 

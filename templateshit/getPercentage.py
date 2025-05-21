@@ -193,6 +193,7 @@ def compare_images(image1, image2_path, x1, y1, x2, y2, userid):
     #print(f"Kaydedilecek dosya adı: {userid}")
     # Load the second image from the file path
     image2 = Image.open(image2_path)
+    i2w, i2h = image2.size
 
     image1 = image1.convert("RGBA")
     image2 = image2.convert("RGBA")
@@ -248,7 +249,7 @@ def compare_images(image1, image2_path, x1, y1, x2, y2, userid):
     matching_percentage =  100 - (round((wrong_pixelcount / total_pixels) * 100, 4))
     wrong_pixels = wrong_pixelcount
 
-    print(str(matching_percentage) + "-" + str(total_pixels) + "-" + str(wrong_pixelcount))
+    print(str(matching_percentage) + "-" + str(total_pixels) + "-" + str(wrong_pixelcount) + "-" + str(i2w) + "-" + str(i2h))
 
     #image2.paste(translucent, (0, 0), mask)
     result.save(f"{userid}.png")

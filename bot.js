@@ -4,7 +4,6 @@ const fs = require('fs');
 const { Pool } = require('pg');
 const moment = require('moment');
 const { RateLimiterMemory } = require('rate-limiter-flexible');
-const chalk = require('chalk');
 
 const voidFunc = require("./functions/void");
 const downloadPixelya = require("./functions/pixelyadownloader");
@@ -62,12 +61,12 @@ client.once('ready', () => { // Bot başladığında
 });
 
 client.on('guildDelete', guild => {
-    console.log(chalk.bold(`[${moment().format("YYYY-MM-DD HH:mm:ss")}] `) + `- ${client.user.tag} has been kicked out of server ${guild?.name}.`)
+    console.log(`[${moment().format("YYYY-MM-DD HH:mm:ss")}] - ${client.user.tag} has been kicked out of server ${guild?.name}.`)
 });
 
 client.on('guildCreate', async (guild) => {
   loadCommands(guild, client);
-  console.log(chalk.bold(`[${moment().format("YYYY-MM-DD HH:mm:ss")}] ` + `- ${client.user.tag} has been added to the server ${guild?.name}`))
+  console.log(`[${moment().format("YYYY-MM-DD HH:mm:ss")}] - ${client.user.tag} has been added to the server ${guild?.name}.`)
 });
 
 client.on('messageCreate', async message => {

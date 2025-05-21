@@ -31,7 +31,7 @@ module.exports = {
                 //interaction.reply('Verin indiriliyor fiksicim...')
                 interaction.deferReply();
 
-                exec(`python templateshit\\getPercentage.py ${result.canvasid} ${result.coordinates} templateshit\\images\\${checkTempID}.png true ${interaction.user.id}`, (error, stdout, stderr) => {
+                exec(`python templateshit\\getPercentage.py ${result.canvasid} ${result.coordinates} templateshit\\images\\${checkTempID}.png true ${interaction.user.id}`, async (error, stdout, stderr) => {
                     if (error) {
                         console.log(`[AREADOWNLOAD ERROR]: ${error.message}`);
                         if (error.message.includes("aiohttp.client_exceptions.ContentTypeError")) {
@@ -39,6 +39,7 @@ module.exports = {
                         }
                         return;
                     }
+                    
                     if (stderr) {
                         console.log(`areadownload stderr: ${stderr}`);
                         return;
@@ -47,9 +48,9 @@ module.exports = {
                     //const file = new AttachmentBuilder('./images/example.png');
                     console.log(stdout)
 
-                    const coordFinal31 = result.coordinates.split("_") //4075_-9033
+                    const [final_X, final_Y] = result.coordinates.split("_") //4075_-9033
 
-                    const output = stdout.split("-")
+                    const [completion, totalPixels, wrongPixels, imageWidth, imageHeight] = stdout.split("-")
 
                     //var embed = new MessageEmbed()
                     //embed.setTitle(`Shablon Bilgisi`)
@@ -72,18 +73,51 @@ module.exports = {
                           break;
                       }
 
+                    let target = data.find(obj => obj.id === checkTempID);
+
+                    target.name = target.name;
+                    target.coordinates = target.coordinates
+                    target.link = target.link
+                    target.id = target.id
+                    target.owner = target.owner
+                    target.visibility = target.visibility
+                    target.guildID = target.guildID
+                    target.canvasid = target.canvasid
+
+                    const correctPixels = Number(totalPixels) - Number(wrongPixels)
+                    let imtiredofthesefuckassvariables = "+";
+
+                    let zoomPoint = "";
+                    zoomPoint = (Number(final_X) + (Number(imageWidth) / 2)) + "," + (Number(final_Y) + (Number(imageHeight) / 2))
+
+
                     const file = new MessageAttachment(`${interaction.user.id}.png`, `${interaction.user.id}.png`);
                     var embed = new MessageEmbed()
                     embed.setTitle(`${result.name}`)
-                    embed.setURL(`https://pixelya.fun/#d,${Number(coordFinal31[0]) + (Number(coordFinal31[0]) / 2)},${Number(coordFinal31[1]) - (Number(coordFinal31[1]) / 2)},10`)
+                    embed.setURL(`https://pixelya.fun/#d,${zoomPoint},10`)
                     embed.setImage(`attachment://${interaction.user.id}.png`)
                     embed.setFooter(`Thanks to @Junifil for her help in the making of this bot. ID: ${checkTempID}`, 'https://images-ext-1.discordapp.net/external/YGKIglAAAUVQ6YRKh7TJTa-sXingve8n9p3XmRoWh04/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/643194794230808583/c24d2e5f0d238dd2b606baff068b4374.webp?format=webp' )
-                    embed.addField(`Correct/All Pixels`, `${(Number(output[1]) - Number(output[2])).toLocaleString('tr-TR')}/${Number(output[1]).toLocaleString('tr-TR')}`, true)
-                    embed.addField(`Wrong Pixel Count`, `${Number(output[2]).toLocaleString('tr-TR')}`, true)
-                    embed.addField(`Percentage Completion Rate`, `%${output[0].toString().substring(0, 4)}`, true)
+                    embed.addField(`Correct/All Pixels`, `${(Number(totalPixels) - Number(wrongPixels)).toLocaleString('tr-TR')}/${Number(totalPixels).toLocaleString('tr-TR')}`, true)
+                    embed.addField(`Wrong Pixel Count`, `${Number(wrongPixels).toLocaleString('tr-TR')}`, true)
+                    embed.addField(`Percentage Completion Rate`, `%${completion.toString().substring(0, 4)}`, true)
                     embed.addField(`Added by`, `${result.owner}`, true)
                     embed.addField(`Requested by`, `${interaction.user.tag}`, true)
                     embed.addField(`Canvas`, `${varIprobablywillforget}`, true)
+
+                    if (Math.sign(correctPixels - Number(result.fromlast)) == 1) {
+                        imtiredofthesefuckassvariables = "+" + (correctPixels - Number(result.fromlast));
+                    } else if (Math.sign(correctPixels - Number(result.fromlast)) == -1) {
+                        imtiredofthesefuckassvariables = "-" + (correctPixels - Number(result.fromlast));
+                    } else {
+                        imtiredofthesefuckassvariables = "0... This isn't going anywhere."
+                    }
+
+                    embed.addField(`From Last`, `${imtiredofthesefuckassvariables}`, true)
+
+                    target.fromlast = (Number(totalPixels) - Number(wrongPixels)).toString();
+                    console.log(target.fromlast)
+
+                    await fs.writeFileSync("./templateshit/data.json", JSON.stringify(data, null, 2), 'utf8');
 
                     const zemcidegisken = 1;
                     const checkFileExistence = setInterval(async () => {

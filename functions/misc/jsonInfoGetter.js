@@ -1,9 +1,9 @@
 
-async function getLinkAndCoordinatesById(id, data) {
+async function getLinkAndCoordinatesById(id, data, interaction) {
     const maxId = Math.max(...data.map(item => parseInt(item.id, 10)));
 
     if (parseInt(id, 10) > maxId) {
-        interaction.reply("Geçersiz ID fiksicim!")
+        interaction.reply("There's no template with this ID!")
         return null;
     }
 
@@ -19,7 +19,8 @@ async function getLinkAndCoordinatesById(id, data) {
         owner: jsonfile.owner,
         visibility: jsonfile.visibility,
         guildID: jsonfile.guildID,
-        canvasid: jsonfile.canvasid
+        canvasid: jsonfile.canvasid,
+        fromlast: jsonfile.fromlast
     };
 }
 
